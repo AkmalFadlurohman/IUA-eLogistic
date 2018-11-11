@@ -14,7 +14,6 @@ class ItemResponse extends BaseResponse {
     template(id, size, owner, location) {
         return {
             data: [
-                {name: '_id', value: id, prompt: 'Unique ID'},
                 {name: 'size', value: size, prompt: 'Space needed for storage'},
                 {name: 'owner', value: owner, prompt: 'The owner of the item'},
                 {name: 'location', value: location, prompt: 'Current location of the item'},

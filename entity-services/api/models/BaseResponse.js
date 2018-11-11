@@ -10,6 +10,14 @@ class BaseRespones {
             }
         }
     }
+
+    static toObject(template) {
+        let obj = {}
+        for (let prop of template.data) {
+            obj[prop.name] = prop.value;
+        }
+        return obj
+    }
 }
 
 module.exports = BaseRespones;
