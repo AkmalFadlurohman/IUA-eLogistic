@@ -5,8 +5,7 @@ class RequestResponse extends BaseResponse {
         super()
         for (let doc of requestDocs) {
             let additional_info = this.additional_data(doc);
-            let item = this.template(
-                doc._id, 
+            let item = this.template( 
                 doc.status,
                 doc.price,
                 doc.date,
@@ -18,12 +17,12 @@ class RequestResponse extends BaseResponse {
             item.href = this.collection.href + '/requests/' + doc._id;
             this.collection.items.push(item);
         }
-        this.collection.template = this.template('', '', 0, '', [], '', type);
+        this.collection.template = this.template('', 0, '', [], '', type);
         let additional_info = this.additional_data({
             type, source: '', destination: '', location: '',
             sinceDate: '', untilDate: '', frequency: '',
-        })
-        this.collection.template.concat(additional_info)
+        });
+        this.collection.template.data.concat(additional_info);
     }
 
     additional_data(info) {
@@ -41,10 +40,9 @@ class RequestResponse extends BaseResponse {
         return additional_info
     }
 
-    template(id, status, price, date, items, requester, type) {
+    template(status, price, date, items, requester, type) {
         return {
             data: [
-                {name: '_id', value: id, prompt: 'Unique ID'},
                 {name: 'status', value: status, prompt: 'Status of the request, used for tracking'},
                 {name: 'price', value: price, prompt: 'Price that should be paid by the requester'},
                 {name: 'date', value: date, prompt: 'Date the request was made'},

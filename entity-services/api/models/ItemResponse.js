@@ -4,14 +4,14 @@ class ItemResponse extends BaseResponse {
     constructor(itemDocs) {
         super()
         for (let doc of itemDocs) {
-            let item = this.template(doc._id, doc.size, doc.owner, doc.location);
+            let item = this.template(doc.size, doc.owner, doc.location);
             item.href = this.collection.href + '/items/' + doc._id;
             this.collection.items.push(item);
         }
-        this.collection.template = this.template('', '', '', '');
+        this.collection.template = this.template('', '', '');
     }
 
-    template(id, size, owner, location) {
+    template(size, owner, location) {
         return {
             data: [
                 {name: 'size', value: size, prompt: 'Space needed for storage'},

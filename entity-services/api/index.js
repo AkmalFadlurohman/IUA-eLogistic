@@ -4,7 +4,7 @@ const express = require('express');
 const items = require('./routes/items');
 const warehouses = require('./routes/warehouses');
 const partners = require('./routes/partners');
-const requests = require('./routes/responses');
+const requests = require('./routes/requests');
 
 const DBG = require('debug');
 const debug = DBG('api:debug');

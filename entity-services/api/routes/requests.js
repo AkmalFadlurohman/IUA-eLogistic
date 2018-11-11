@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const debug = require('debug')('api:responses');
+const debug = require('debug')('api:requests');
 const db = require('../store');
 const RequestResponse = require('../models/RequestResponse');
 
