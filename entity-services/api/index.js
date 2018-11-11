@@ -4,6 +4,7 @@ const express = require('express');
 const items = require('./routes/items');
 const warehouses = require('./routes/warehouses');
 const partners = require('./routes/partners');
+const requests = require('./routes/responses');
 
 const DBG = require('debug');
 const debug = DBG('api:debug');
@@ -21,6 +22,7 @@ app.use(logger('dev'));
 app.use('/api/items', items);
 app.use('/api/warehouses', warehouses);
 app.use('/api/partners', partners);
+app.use('/api/requests', requests);
 
 app.get('/', (req, res) => {
     return res.status(200).redirect('/api')
@@ -35,6 +37,7 @@ app.get('/api', (req, res) => {
                 {rel: 'items', href: '/api/items'},
                 {rel: 'partners', href: '/api/partners'},
                 {rel: 'warehouses', href: '/api/warehouses'},
+                {rel: 'requests', href: '/api/requests'}
             ]
         }
     })
