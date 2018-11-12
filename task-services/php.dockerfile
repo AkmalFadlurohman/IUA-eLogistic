@@ -18,17 +18,17 @@ RUN rm /etc/apt/preferences.d/no-debian-php \
 # Copy php.ini file
 ADD php.ini /usr/local/etc/php
 
+# Copy Workfile to Container
+COPY ./SOAP /home/src/SOAP
+
 # Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 # Dependency Setup
-COPY composer.json /home/src/SOAP
-RUN cd /home/src/SOAP
-RUN composer install --no-scripts --no-autoloader
-
-# Copy Workfile to Container
-
-COPY ./SOAP /home/src/SOAP
+# COPY composer.json /home/src/SOAP
+# RUN cd /home/src/SOAP
+# RUN composer require zendframework/zend-soap
+# RUN composer install
 
 EXPOSE 9000
 CMD ["php-fpm"]
