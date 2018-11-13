@@ -21,7 +21,34 @@ router.post('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     db.items.find({ _id: req.params.id }, function(err, docs) {
-        res.status(200).json(docs);
+        if (docs.length === 0) {
+            res.status(404).end();
+        } else {
+            let response = new ItemResponse(docs);
+            res.status(200).json(response.collection);
+        }
+    })
+})
+
+router.put('/:id', (req, res) => {
+    const template = req.body.template;
+    const doc = ItemResponse.toObject(template);
+    db.items.update({ _id: req.params.id }, { $set: doc }, {}, function(err, numReplaced) {
+        if (numReplaced === 0) {
+            res.status(404).end();
+        } else { 
+            res.status(200).end();
+        }
+    })
+})
+
+router.delete('/:id', (req, res) => {
+    db.items.remove({ _id: req.params.id }, {}, function(err, numRemoved) {
+        if (numRemoved === 0) {
+            res.status(404).end();
+        } else {
+            res.status(204).end();
+        }
     })
 })
 

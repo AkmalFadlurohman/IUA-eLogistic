@@ -33,6 +33,7 @@ const populate = () => {
         add_item(10, 'iqbal', null);
         add_item(10, 'iqbal', null);
         add_item(12, 'iqbal', null);
+        db.items.insert({ _id: 'xxx', size: 11, owner: 'iqbal', location: null})
     }
 
     if (!db.partners.find({}, (err, docs) => docs.length)) {
