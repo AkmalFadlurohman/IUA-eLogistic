@@ -7,7 +7,7 @@ const PartnerResponse = require('../models/PartnerResponse');
 router.get('/', (req, res) => {
     db.partners.find({}, function(err, docs) {
         let response = new PartnerResponse(docs);
-        res.status(200).json(response.collection);
+        res.status(200).json(response.getCollection());
     })
 })
 
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
             res.status(404).end();
         } else {
             let response = new PartnerResponse(docs);
-            res.status(200).json(response.collection);
+            res.status(200).json(response.getCollection());
         }
     })
 })

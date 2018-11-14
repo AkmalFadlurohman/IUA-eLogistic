@@ -7,7 +7,7 @@ const WarehouseResponse = require('../models/WarehouseResponse');
 router.get('/', (req, res) => {
     db.warehouses.find({}, function(err, docs) {
         let response = new WarehouseResponse(docs);
-        res.status(200).json(response.collection);
+        res.status(200).json(response.getCollection());
     })
 })
 
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
             res.status(404).end();
         } else {
             let response = new WarehouseResponse(docs);
-            res.status(200).json(response.collection);
+            res.status(200).json(response.getCollection());
         }
     })
 })

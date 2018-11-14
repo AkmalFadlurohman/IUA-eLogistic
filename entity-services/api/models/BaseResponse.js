@@ -11,6 +11,12 @@ class BaseRespones {
         }
     }
 
+    getCollection() {
+        return {
+            collection: this.collection
+        }
+    }
+
     static toObject(template) {
         let obj = {}
         for (let prop of template.data) {

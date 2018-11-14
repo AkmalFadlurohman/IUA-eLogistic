@@ -7,8 +7,12 @@ const RequestResponse = require('../models/RequestResponse');
 router.get('/', (req, res) => {
     db.requests.find({}, function(err, docs) {
         let response = new RequestResponse(docs);
-        res.status(200).json(response.collection);
+        res.status(200).json(response.getCollection());
     })
+})
+
+router.post('/', (req, res) => {
+
 })
 
 module.exports = router
