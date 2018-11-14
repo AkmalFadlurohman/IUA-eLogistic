@@ -8,7 +8,7 @@ class WarehouseResponse extends BaseResponse {
             item.href = this.collection.href + '/warehouses/' + doc._id;
             this.collection.items.push(item);
         }
-        this.collection.template = this.template('', '', []);
+        this.collection.template = this.template('', 0, []);
     }
 
     template(address, capacity, items) {

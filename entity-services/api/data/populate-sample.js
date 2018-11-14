@@ -49,7 +49,7 @@ const populate = () => {
         add_warehouses('Bandung', 10000, []);
         add_warehouses('Jakarta', 20000, []);
         add_warehouses('Malang', 30000, []);
-        db.items.insert({ _id: 'xxx', address: 'Jogja', capacity: '15000', items: []})
+        db.warehouses.insert({ _id: 'xxx', address: 'Jogja', capacity: 15000, items: []})
     }
 }
 
