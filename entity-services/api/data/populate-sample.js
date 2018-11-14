@@ -41,6 +41,7 @@ const populate = () => {
         add_company('iqbal', []);
         add_company('akmal', []);
         add_company('um', []);
+        db.partners.insert({ _id: 'xxx', name: 'iqbal', items: []})
     }
 
     if (!db.warehouses.find({}, (err, docs) => docs.length)) {
@@ -48,6 +49,7 @@ const populate = () => {
         add_warehouses('Bandung', 10000, []);
         add_warehouses('Jakarta', 20000, []);
         add_warehouses('Malang', 30000, []);
+        db.items.insert({ _id: 'xxx', address: 'Jogja', capacity: '15000', items: []})
     }
 }
 
