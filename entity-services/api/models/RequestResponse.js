@@ -13,7 +13,7 @@ class RequestResponse extends BaseResponse {
                 doc.requester,
                 doc.type
             );
-            item.concat(additional_info);
+            item.data.push(...additional_info);
             item.href = this.collection.href + '/requests/' + doc._id;
             this.collection.items.push(item);
         }
