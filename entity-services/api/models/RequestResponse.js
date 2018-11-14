@@ -22,7 +22,7 @@ class RequestResponse extends BaseResponse {
             type, source: '', destination: '', location: '',
             sinceDate: '', untilDate: '', frequency: '',
         });
-        this.collection.template.data.concat(additional_info);
+        this.collection.template.data.push(...additional_info);
     }
 
     additional_data(info) {
