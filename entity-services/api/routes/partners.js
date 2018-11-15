@@ -3,11 +3,9 @@ const router = express.Router();
 const debug = require('debug')('api:partners');
 const db = require('../store');
 const PartnerResponse = require('../models/PartnerResponse');
-const crypto = require('crypto');
 
-const hash = (password) => {
-    return crypto.createHash('md5').update(password).digest('hex') 
-}
+const hash = (password) => require('crypto').createHash('md5').update(password).digest('hex') 
+
 
 router.get('/', (req, res) => {
     db.partners.find({}, function(err, docs) {
