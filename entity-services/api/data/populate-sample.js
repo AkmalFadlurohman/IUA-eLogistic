@@ -1,5 +1,5 @@
 const Datastore = require('nedb');
-const fs = require('fs');
+const crypto = require('crypto');
 
 db = require('../store');
 
@@ -9,8 +9,9 @@ const add_item = (size, owner, location) => {
     })
 }
 
-const add_company = (name, items) => {
-    db.partners.insert({name, items}, () => {
+const add_company = (name, pass, items) => {
+    const password = crypto.createHash('md5').update(pass).digest('hex');
+    db.partners.insert({name, password, items}, () => {
         console.log("PartnerCompany created.")
     })
 }
@@ -38,9 +39,9 @@ const populate = () => {
 
     if (!db.partners.find({}, (err, docs) => docs.length)) {
         console.log('Populating partners...');
-        add_company('iqbal', []);
-        add_company('akmal', []);
-        add_company('um', []);
+        add_company('iqbal', 'iqbal', []);
+        add_company('akmal', 'akmal', []);
+        add_company('um', 'um', []);
         db.partners.insert({ _id: 'xxx', name: 'iqbal', items: []})
     }
 

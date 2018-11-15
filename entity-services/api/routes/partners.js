@@ -3,6 +3,11 @@ const router = express.Router();
 const debug = require('debug')('api:partners');
 const db = require('../store');
 const PartnerResponse = require('../models/PartnerResponse');
+const crypto = require('crypto');
+
+const hash = (password) => {
+    return crypto.createHash('md5').update(password).digest('hex') 
+}
 
 router.get('/', (req, res) => {
     db.partners.find({}, function(err, docs) {
@@ -14,6 +19,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const template = req.body.template;
     const doc = PartnerResponse.toObject(template);
+    doc.password = hash(doc.password);
     db.partners.insert(doc, function(err, newDoc) {
         res.location(req.baseUrl+'/'+newDoc._id).status(201).end();
     })
@@ -33,6 +39,7 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
     const template = req.body.template;
     const doc = PartnerResponse.toObject(template);
+    doc.password = hash(doc.password);
     db.partners.update({ _id: req.params.id }, { $set: doc }, {}, function(err, numReplaced) {
         if (numReplaced === 0) {
             res.status(404).end();

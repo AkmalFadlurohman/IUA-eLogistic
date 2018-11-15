@@ -4,6 +4,7 @@ class LoginResponse extends BaseResponse {
     constructor() {
         super()
         delete this.collection.items
+        delete this.collection.links
         this.collection.template = this.template();
         this.collection.href += '/login';
     }
