@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const debug = require('debug')('api:login');
 const db = require('../store');
-const LoginResponse = require('../models/LoginResponse')
+const LoginResponse = require('../models/LoginResponse');
+const generateToken = require('../auth/generateToken');
 
 const hash = (password) => require('crypto').createHash('md5').update(password).digest('hex') 
 
@@ -22,7 +23,17 @@ router.post('/', (req, res) => {
             if (doc.password !== password) {
                 res.status(401).end();
             } else {
-                res.status(200).send('Logged in.')
+                let response = new LoginResponse();
+                delete response.collection.template
+                response.collection.links = [
+                    {rel: 'items', href: '/api/items'},
+                    {rel: 'partners', href: '/api/partners'},
+                    {rel: 'warehouses', href: '/api/warehouses'},
+                    {rel: 'requests', href: '/api/requests'},
+                    {rel: 'login', href: '/login'}
+                ]
+                response.token = generateToken(doc.name);
+                res.status(200).send(response);
             }
         }
     })
