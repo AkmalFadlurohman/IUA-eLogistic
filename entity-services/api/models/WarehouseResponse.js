@@ -9,6 +9,7 @@ class WarehouseResponse extends BaseResponse {
             this.collection.items.push(item);
         }
         this.collection.template = this.template('', 0, []);
+        this.collection.href += '/warehouses';
     }
 
     template(address, capacity, items) {

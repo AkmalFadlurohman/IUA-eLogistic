@@ -9,6 +9,7 @@ class ItemResponse extends BaseResponse {
             this.collection.items.push(item);
         }
         this.collection.template = this.template('', '', '');
+        this.collection.href += '/items';
     }
 
     template(size, owner, location) {

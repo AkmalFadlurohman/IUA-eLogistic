@@ -23,6 +23,7 @@ class RequestResponse extends BaseResponse {
             sinceDate: '', untilDate: '', frequency: '',
         });
         this.collection.template.data.push(...additional_info);
+        this.collection.href += '/requests';
     }
 
     additional_data(info) {

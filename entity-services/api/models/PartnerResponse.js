@@ -9,6 +9,7 @@ class PartnerResponse extends BaseResponse {
             this.collection.items.push(item);
         }
         this.collection.template = this.template('', []);
+        this.collection.href += '/partners';
     }
 
     template(name, items) {
