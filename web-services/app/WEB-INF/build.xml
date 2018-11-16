@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BuildingSansIDE" default="run" basedir=".">
-	<description>WS and Servlet Build</description>
+	<description>WS Build</description>
+	<path id="build.classpath">
+		<fileset dir="lib">
+	    	<include name="**/*.jar"/>
+	    	<include name="**/*.zip"/>
+	  	</fileset>
+	</path>
 	<target name="compile"
 		description="Compile the Java code.">
-		<javac srcdir="sources"
-		destdir="classes"
-		debug="true"
-		includeantruntime="false" />
+		<javac 
+			srcdir="sources"
+			destdir="classes"
+			debug="true"
+			includeantruntime="false" >
+			<classpath refid="build.classpath"/>
+		</javac>
 	</target>
 	<target name="run" depends="compile"
 		description="Run the Java application.">

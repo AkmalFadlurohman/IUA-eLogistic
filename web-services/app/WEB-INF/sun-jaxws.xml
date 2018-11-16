@@ -5,4 +5,7 @@
 	<endpoint name="HelloWorld"
 			implementation="com.hello.ws.HelloWorld"
 			url-pattern="/ws/hello" />
+	<endpoint name="MailServer"
+			implementation="com.IUA.elogistic.task.MailServer"
+			url-pattern="/task/mail" />
 </endpoints>
