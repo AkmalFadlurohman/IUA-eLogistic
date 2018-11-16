@@ -1,0 +1,10 @@
+version: '2.0'
+services:
+  tomcat:
+    image: web-services_tomcat
+    container_name: web-services_tomcat
+    build:
+      context: ./
+      dockerfile: tomcat.dockerfile
+    ports:
+      - "8080:8080"

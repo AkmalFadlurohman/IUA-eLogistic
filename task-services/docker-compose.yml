@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./SOAP:/home/src/SOAP:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./SOAP:/home/src/SOAP
     links:
       - php
   php:
@@ -17,7 +17,7 @@ services:
       context: ./
       dockerfile: php.dockerfile
     volumes:
-      - ./SOAP:/home/src/SOAP:ro
+      - ./SOAP:/home/src/SOAP
     ports:
       - "9000:9000"
 volumes:
