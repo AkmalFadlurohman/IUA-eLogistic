@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  entity-service:
+    image: elogistik-entity-img
+    container_name: elogistik-entity-svc
+    build: ./api
+    ports:
+      - 3000:3000
