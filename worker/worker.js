@@ -1,23 +1,31 @@
+const {
+        dummyPayment,
+        paymentFailed,
+      } = require('./dummy-payment');
+
+const {
+        sentConfirmation,
+        createNewShipping,
+      } = require('./shipping-request');
+
+const {
+        createNewStorage
+      } = require('./storage-request');
+
+const {
+        createNewSupply
+      } = require('./supply-request');
+
 const { Client, logger } = require('camunda-external-task-client-js');
-
-// configuration for the Client:
-//  - 'baseUrl': url to the Process Engine
-//  - 'logger': utility to automatically log important events
-const config = { baseUrl: 'http://localhost:8080/engine-rest', use: logger };
-
-// create a Client instance with custom configuration
+const config = { baseUrl: 'http://localhost:8080/engine-rest'};
 const client = new Client(config);
 
-// susbscribe to the topic: 'charge-card'
-client.subscribe('charge-card', async function({ task, taskService }) {
-  // Put your business logic here
+client.subscribe('dummy-payment', dummyPayment);
+client.subscribe('payment-failed', paymentFailed);
 
-  // Get a process variable
-  const amount = task.variables.get('amount');
-  const item = task.variables.get('item');
+client.subscribe('sent-confirmation', sentConfirmation);
+client.subscribe('create-new-shipping', createNewShipping);
 
-  console.log(`Charging credit card with an amount of ${amount}€ for the item '${item}'...`);
+client.subscribe('create-new-storage', createNewStorage);
 
-  // Complete the task
-  await taskService.complete(task);
-});
+client.subscribe('create-new-supply', createNewSupply);
