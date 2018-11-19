@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_0vdflg0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0vdflg0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
   <bpmn:collaboration id="Collaboration_0mjbj3g">
-    <bpmn:participant id="Participant_09n4oxb" name="Storage Service" processRef="Process_1" />
+    <bpmn:participant id="storage-service" name="Storage Service" processRef="storageProcess" />
     <bpmn:participant id="Participant_1aa9rza" name="Customer" />
     <bpmn:messageFlow id="MessageFlow_1g6d1fe" sourceRef="Participant_1aa9rza" targetRef="StartEvent_1" />
     <bpmn:messageFlow id="MessageFlow_1f3nrg9" name="Ship Request" sourceRef="Participant_1aa9rza" targetRef="IntermediateCatchEvent_14ntpnn" />
@@ -10,7 +10,7 @@
     <bpmn:messageFlow id="MessageFlow_1nv0von" name="Invoice" sourceRef="Task_058q2ug" targetRef="Participant_1aa9rza" />
     <bpmn:messageFlow id="MessageFlow_15o0t2p" name="Notification" sourceRef="EndEvent_063ufki" targetRef="Participant_1aa9rza" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" isExecutable="true">
+  <bpmn:process id="storageProcess" name="StorageService" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1h5kl8q">
       <bpmn:lane id="Lane_17p2tfq" name="Clerk">
         <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
@@ -31,19 +31,23 @@
         <bpmn:flowNodeRef>Task_07ryx6r</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_1">
+    <bpmn:startEvent id="StartEvent_1" name="Receive">
       <bpmn:outgoing>SequenceFlow_189ma86</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0tba6gy" />
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_189ma86" sourceRef="StartEvent_1" targetRef="Task_058q2ug" />
     <bpmn:sequenceFlow id="SequenceFlow_1gkrsnk" sourceRef="Task_07ryx6r" targetRef="Task_0cxtos2" />
-    <bpmn:sendTask id="Task_058q2ug" name="Create new StorageRequest">
+    <bpmn:sendTask id="Task_058q2ug" name="Create new StorageRequest" camunda:type="external" camunda:topic="create-new-storage">
       <bpmn:incoming>SequenceFlow_189ma86</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_01kym9l</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_01kym9l" sourceRef="Task_058q2ug" targetRef="Task_0k0jszl" />
     <bpmn:sequenceFlow id="SequenceFlow_1dbrp4a" sourceRef="Task_0k0jszl" targetRef="Task_07ryx6r" />
-    <bpmn:callActivity id="Task_0k0jszl" name="Payment Service">
+    <bpmn:callActivity id="Task_0k0jszl" name="Payment Service" calledElement="dummyPayment">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_01kym9l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1dbrp4a</bpmn:outgoing>
     </bpmn:callActivity>
@@ -55,31 +59,45 @@
     <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_14ntpnn">
       <bpmn:incoming>SequenceFlow_1k3t0kr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0s8h6k7</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_12llr0c" />
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_1dnh696" name="Storage time limit">
       <bpmn:incoming>SequenceFlow_0gnksa9</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0s8k3zl</bpmn:outgoing>
-      <bpmn:signalEventDefinition />
+      <bpmn:signalEventDefinition signalRef="Signal_1xpcmcc" />
     </bpmn:intermediateCatchEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0twmzgc">
       <bpmn:incoming>SequenceFlow_0zbftuq</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1l5bp0c</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0kq16dq</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:callActivity id="Task_1pjn7ls" name="ShippingService">
+    <bpmn:callActivity id="Task_1pjn7ls" name="ShippingService" calledElement="shippingProcess">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out variables="all" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0s8h6k7</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1l5bp0c</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:endEvent id="EndEvent_0b19u0o">
       <bpmn:incoming>SequenceFlow_0kq16dq</bpmn:incoming>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0fn6rhd" camunda:type="external" camunda:topic="sent-confirmation" />
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_0tvenwi" name="Send back to source">
+    <bpmn:userTask id="Task_0tvenwi" name="Send back to source" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="sendBack" label="Send back to source?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0s8k3zl</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zbftuq</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0cxtos2" name="Send to warehouse">
+    <bpmn:userTask id="Task_0cxtos2" name="Send to warehouse" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="goodsSent" label="Goods Sent to Warehouse?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1gkrsnk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10d2308</bpmn:outgoing>
     </bpmn:userTask>
@@ -91,7 +109,12 @@
     <bpmn:sequenceFlow id="SequenceFlow_0zbftuq" sourceRef="Task_0tvenwi" targetRef="ExclusiveGateway_0twmzgc" />
     <bpmn:sequenceFlow id="SequenceFlow_1l5bp0c" sourceRef="Task_1pjn7ls" targetRef="ExclusiveGateway_0twmzgc" />
     <bpmn:sequenceFlow id="SequenceFlow_0kq16dq" sourceRef="ExclusiveGateway_0twmzgc" targetRef="EndEvent_0b19u0o" />
-    <bpmn:userTask id="Task_07ryx6r" name="Take goods from source">
+    <bpmn:userTask id="Task_07ryx6r" name="Take goods from source" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="goodsTaken" label="Goods taken from source?" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1dbrp4a</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1gkrsnk</bpmn:outgoing>
     </bpmn:userTask>
@@ -102,12 +125,17 @@
     </bpmn:boundaryEvent>
     <bpmn:endEvent id="EndEvent_063ufki">
       <bpmn:incoming>SequenceFlow_0uyi8k9</bpmn:incoming>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0xtcfsx" camunda:type="external" camunda:topic="payment-failed" />
     </bpmn:endEvent>
   </bpmn:process>
+  <bpmn:message id="Message_0tba6gy" name="newStorage" />
+  <bpmn:message id="Message_12llr0c" name="newShipping" />
+  <bpmn:signal id="Signal_1xpcmcc" name="Signal_0kvs89c" />
+  <bpmn:message id="Message_0fn6rhd" name="Message_10nhva5" />
+  <bpmn:message id="Message_0xtcfsx" name="Message_03oa4kf" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0mjbj3g">
-      <bpmndi:BPMNShape id="Participant_09n4oxb_di" bpmnElement="Participant_09n4oxb">
+      <bpmndi:BPMNShape id="Participant_09n4oxb_di" bpmnElement="storage-service">
         <dc:Bounds x="85" y="-12" width="1297" height="528" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_17p2tfq_di" bpmnElement="Lane_17p2tfq">
@@ -125,6 +153,9 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="StartEvent_05qbxjb_di" bpmnElement="StartEvent_1">
         <dc:Bounds x="168" y="125" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="166" y="168" width="40" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_189ma86_di" bpmnElement="SequenceFlow_189ma86">
         <di:waypoint x="204" y="143" />
