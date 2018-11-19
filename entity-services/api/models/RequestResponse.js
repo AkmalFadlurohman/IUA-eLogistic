@@ -30,9 +30,9 @@ class RequestResponse extends BaseResponse {
         let additional_info = []
         if (info.type === 'shipping') {
             additional_info = this.shippingTemplate(info.source, info.destination);
-        } else if (type === 'storage') {
+        } else if (info.type === 'storage') {
             additional_info = this.storageTemplate(info.location, info.sinceDate, info.untilDate);
-        } else if (type === 'supply') {
+        } else if (info.type === 'supply') {
             additional_info = this.supplyTemplate(
                 info.source, info.destination, info.frequency,
                 info.sinceDate, info.untilDate
@@ -73,7 +73,7 @@ class RequestResponse extends BaseResponse {
         return [
             {name: 'source', value: source, prompt: 'From where the goods should be picked up'},
             {name: 'destination', value: destination, prompt: 'To where the goods should be delivered'},
-            {name: 'frequency', value: location, prompt: 'How frequent the goods should be supplied'},
+            {name: 'frequency', value: frequency, prompt: 'How frequent the goods should be supplied'},
             {name: 'sinceDate', value: sinceDate, prompt: 'Since when the supply is valid'},
             {name: 'untilDate', value: untilDate, prompt: 'Until when the supply is valid'},
         ]
