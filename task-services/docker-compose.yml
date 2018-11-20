@@ -1,0 +1,24 @@
+version: '2.0'
+#services:
+#  task-service:
+#    image: elogistik-task-img
+#    container_name: elogistik-task-svc
+#    build:
+#      context: ./
+#      dockerfile: camunda.dockerfile
+#    ports:
+#      - "9001:8080"
+services:
+  task-service:
+    image: camunda/camunda-bpm-platform:latest
+    container_name: elogistik-task-svc
+    ports:
+      - "9001:8080"
+    links:
+      - task-worker
+  task-worker:
+    image: elogistik-worker-img
+    container_name: elogistik-worker-svc
+    build:
+      context: ./
+      dockerfile: worker.dockerfile
