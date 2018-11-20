@@ -140,7 +140,7 @@ async function createNewShipping({ task, taskService }) {
     };
 
     const options = {
-        url: 'http://127.0.0.1:3000/api/requests',
+        url: 'http://localhost:3000/api/requests',
         method: 'POST',
         headers: headers,
         json: template
