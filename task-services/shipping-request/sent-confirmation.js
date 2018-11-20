@@ -4,9 +4,6 @@ const soap = require('strong-soap').soap;
 const wsdl = 'http://localhost:9000/elogistic/task/mail?wsdl';
 
 async function sentConfirmation({ task, taskService }) {
-
-	// TODO email confirmation
-
 	const requester = task.variables.get('requester');
 	const email = task.variables.get('email');
 	var options = {};
