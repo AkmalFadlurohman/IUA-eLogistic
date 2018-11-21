@@ -116,7 +116,8 @@ async function createNewStorage({ task, taskService }) {
     }
 
     const options = {
-        url: 'http://localhost:3000/api/requests',
+        //url: 'http://localhost:3000/api/requests',
+        url: 'http://elogistik-entity-svc:3000/api/requests',
         method: 'POST',
         headers: headers,
         json: template

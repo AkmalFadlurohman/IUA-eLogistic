@@ -1,7 +1,8 @@
 const { Variables } = require('camunda-external-task-client-js');
 const request = require('request');
 const soap = require('strong-soap').soap;
-const wsdl = 'http://localhost:9000/elogistic/task/mail?wsdl';
+//const wsdl = 'http://localhost:9000/elogistic/task/mail?wsdl';
+const wsdl = 'http://elogistik-web-svc:8080/elogistic/task/mail?wsdl';
 
 async function sentConfirmation({ task, taskService }) {
 	const requester = task.variables.get('requester');

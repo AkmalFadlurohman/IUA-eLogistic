@@ -24,7 +24,8 @@ const request = require('request');
 //     };
 
 //     const options = {
-//         url: 'http://127.0.0.1:3000/login',
+//         //url: 'http://127.0.0.1:3000/login',
+//          url: 'http://elogistik-entity-svc:3000/login',
 //         method: 'POST',
 //         headers: headers,
 //         json: template
@@ -140,7 +141,8 @@ async function createNewShipping({ task, taskService }) {
     };
 
     const options = {
-        url: 'http://localhost:3000/api/requests',
+        //url: 'http://localhost:3000/api/requests',
+        url: 'http://elogistik-entity-svc:3000/api/requests',
         method: 'POST',
         headers: headers,
         json: template

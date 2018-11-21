@@ -1,10 +1,25 @@
 version: '2.0'
 services:
   tomcat:
-    image: web-services_tomcat
-    container_name: web-services_tomcat
+    image: elogistik-web-img
+    container_name: elogistik-web-svc
     build:
       context: ./
       dockerfile: tomcat.dockerfile
     ports:
       - "9000:8080"
+    networks:
+      - elogistik-net
+  task-service:
+    image: camunda/camunda-bpm-platform:latest
+    container_name: elogistik-task-svc
+    ports:
+      - "9001:8080"
+#    logging:
+#      driver: "none"
+    networks:
+      - elogistik-net
+networks:
+    elogistik-net:
+        external:
+            name: elogistik-net
