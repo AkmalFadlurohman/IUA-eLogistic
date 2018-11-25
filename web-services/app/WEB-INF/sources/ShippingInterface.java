@@ -1,4 +1,4 @@
-package com.hello.ws;
+package com.IUA.elogistic.task;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -8,13 +8,14 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.net.*;
 import java.io.*;
+import org.json.simple.*;
  
 //Service Endpoint Interface
 @WebService
 @SOAPBinding(style = Style.RPC)
 
-public interface HelloWorldInterface {
+public interface ShippingInterface {
  
-	@WebMethod String getHelloWorldAsString(String name) throws ServletException,IOException ;
+	@WebMethod String createRequest(String status, String price, String date, String items, String requester, String email, String type, String source, String destination) throws ServletException,IOException;
 
 }
