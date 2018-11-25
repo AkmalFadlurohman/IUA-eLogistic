@@ -4,7 +4,7 @@ WORKDIR usr/src/worker
 
 COPY package*.json ./
 
-#RUN npm install
+RUN npm install
 
 COPY . .
 
