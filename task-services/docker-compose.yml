@@ -1,13 +1,4 @@
 version: '2.0'
-#services:
-#  task-service:
-#    image: elogistik-task-img
-#    container_name: elogistik-task-svc
-#    build:
-#      context: ./
-#      dockerfile: camunda.dockerfile
-#    ports:
-#      - "9001:8080"
 services:
   task-worker:
     image: elogistik-worker-img
