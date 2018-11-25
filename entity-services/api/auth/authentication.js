@@ -1,4 +1,4 @@
-const debug = require('debug')('api:auth');
+const debug = require('debug')('api:authentication');
 const token = require('./token');
 const BaseResponse = require('../models/BaseResponse');
 
@@ -13,6 +13,8 @@ const authentication = (req, res, next) => {
 
     try {
         payload = token.verify(clientToken);
+        res.locals.tokenPayload = payload;
+        debug('Authenticated: '+payload.name);
         next();
     } catch(err) {
         debug(err.message);
