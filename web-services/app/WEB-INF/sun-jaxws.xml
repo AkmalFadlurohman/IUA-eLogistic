@@ -2,9 +2,6 @@
 <endpoints
 	xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
 	version="2.0">
-	<endpoint name="HelloWorld"
-			implementation="com.hello.ws.HelloWorld"
-			url-pattern="/ws/hello" />
 	<endpoint name="MailServer"
 			implementation="com.IUA.elogistic.task.MailServer"
 			url-pattern="/task/mail" />
