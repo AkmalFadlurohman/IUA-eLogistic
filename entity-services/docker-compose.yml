@@ -9,6 +9,13 @@ services:
       - 3000:3000
     networks:
       - elogistik-net
+  task-service:
+    image: camunda/camunda-bpm-platform:latest
+    container_name: elogistik-task-svc
+    ports:
+      - "9001:8080"
+    networks:
+      - elogistik-net
 networks:
     elogistik-net:
         external:

@@ -3,7 +3,6 @@
 <%@ page import="java.io.BufferedReader,java.io.DataOutputStream,java.io.InputStreamReader,java.net.HttpURLConnection,java.net.URL"%>
 <%
 	URL url = new URL("http://localhost:9000/elogistic/task/mail?wsdl");
-    //URL url = new URL("http://localhost:8080/app/task/mail?wsdl");
     QName qname = new QName("http://task.elogistic.IUA.com/", "MailServerService");
 
     Service service = Service.create(url, qname);

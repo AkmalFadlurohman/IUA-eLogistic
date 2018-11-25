@@ -25,11 +25,11 @@ Send Request to `http://localhost:8080/engine-rest/message`
       "type": "String"
     },
     "requester" : {
-      "value" : "Rozi",
+      "value" : "Akmal",
       "type": "String"
     },
     "email" : {
-      "value" : "13515026@std.stei.itb.ac.id",
+      "value" : "akmalfadlurohmans@gmail.com",
       "type": "String"
     },
     "type" : {
@@ -71,11 +71,11 @@ Send Request to `http://localhost:8080/engine-rest/message`
       "type": "String"
     },
     "requester" : {
-      "value" : "Rozi",
+      "value" : "Akmal",
       "type": "String"
     },
     "email" : {
-      "value" : "13515026@std.stei.itb.ac.id",
+      "value" : "akmalfadlurohmans@gmail.com",
       "type": "String"
     },
     "type" : {
@@ -121,15 +121,15 @@ Send Request to `http://localhost:8080/engine-rest/message`
       "type": "String"
     },
     "requester" : {
-      "value" : "Rozi",
+      "value" : "Akmal",
       "type": "String"
     },
     "email" : {
-      "value" : "13515026@std.stei.itb.ac.id",
+      "value" : "akmalfadlurohmans@gmail.com",
       "type": "String"
     },
     "type" : {
-      "value" : "storage",
+      "value" : "supply",
       "type": "String"
     },
     "source" : {

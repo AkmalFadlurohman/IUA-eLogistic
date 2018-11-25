@@ -8,4 +8,13 @@
 	<endpoint name="MailServer"
 			implementation="com.IUA.elogistic.task.MailServer"
 			url-pattern="/task/mail" />
+	<endpoint name="Shipping"
+			implementation="com.IUA.elogistic.task.Shipping"
+			url-pattern="/task/shipping" />
+	<endpoint name="Storage"
+			implementation="com.IUA.elogistic.task.Storage"
+			url-pattern="/task/storage" />
+	<endpoint name="Supply"
+			implementation="com.IUA.elogistic.task.Supply"
+			url-pattern="/task/supply" />
 </endpoints>

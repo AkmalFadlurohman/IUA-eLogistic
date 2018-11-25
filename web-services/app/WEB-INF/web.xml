@@ -23,6 +23,27 @@ Inc.//DTD Web Application 2.3//EN"
 		</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>task/shipping</servlet-name>
+		<servlet-class>
+			com.sun.xml.ws.transport.http.servlet.WSServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>task/storage</servlet-name>
+		<servlet-class>
+			com.sun.xml.ws.transport.http.servlet.WSServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>task/supply</servlet-name>
+		<servlet-class>
+			com.sun.xml.ws.transport.http.servlet.WSServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>ws/HelloWorld</servlet-name>
 		<url-pattern>/ws/hello</url-pattern>
@@ -30,5 +51,17 @@ Inc.//DTD Web Application 2.3//EN"
 	<servlet-mapping>
 		<servlet-name>task/mail</servlet-name>
 		<url-pattern>/task/mail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>task/shipping</servlet-name>
+		<url-pattern>/task/shipping</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>task/storage</servlet-name>
+		<url-pattern>/task/storage</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>task/supply</servlet-name>
+		<url-pattern>/task/supply</url-pattern>
 	</servlet-mapping>
 </web-app>
