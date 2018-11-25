@@ -4,7 +4,12 @@ services:
   entity-service:
     image: elogistik-entity-img
     container_name: elogistik-entity-svc
-    build: ./api
+    build: 
+      context: ./api
+      args:
+        - http_proxy="http://iqbalkhowarizmi:20365745@cache.itb.ac.id:8080/"
+        - https_proxy="http://iqbalkhowarizmi:20365745@cache.itb.ac.id:8080/"
+        - no_proxy
     ports:
       - 3000:3000
     networks:
