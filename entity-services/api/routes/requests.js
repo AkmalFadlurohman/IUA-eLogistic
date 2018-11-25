@@ -5,7 +5,7 @@ const db = require('../store');
 const RequestResponse = require('../models/RequestResponse');
 
 router.get('/', (req, res) => {
-    const types = ['shipping', 'storage', 'supply']
+    const types = ['shipping', 'storage', 'supply'];
     const type = types.includes(req.query.template) ? req.query.template : 'shipping';
     db.requests.find({}, function(err, docs) {
         let response = new RequestResponse(docs, type);
