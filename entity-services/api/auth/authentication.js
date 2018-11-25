@@ -8,13 +8,14 @@ const authentication = (req, res, next) => {
     if (authentication) {
         clientToken = authentication.split(' ')[1];
     } else {
-        clientToken = req.body.token || req.query.token || '';
+        clientToken = req.body.token || '';
     }
 
     try {
         payload = token.verify(clientToken);
         next();
     } catch(err) {
+        debug(err.message);
         let response = new BaseResponse();
         delete response.collection.template;
         delete response.collection.items;

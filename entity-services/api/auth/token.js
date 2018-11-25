@@ -10,15 +10,10 @@ const generate = (subject) => {
         subject,
         expiresIn: '24h'
     }
-    return jwt.sign(payload, secret);
+    return jwt.sign(payload, secret, options);
 }
 
 const verify = (token) => {
-    // try {
-    //     return jwt.verify(token, secret);
-    // } catch(err) {
-    //     return err;
-    // }
     return jwt.verify(token, secret);
 }
 

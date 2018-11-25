@@ -42,7 +42,7 @@ const populate = () => {
         add_company('iqbal', 'iqbal', []);
         add_company('akmal', 'akmal', []);
         add_company('um', 'um', []);
-        db.partners.insert({ _id: 'xxx', name: 'iqbal', items: []})
+        db.partners.insert({ _id: 'xxx', name: 'cloud', password: 'cloud', items: []})
     }
 
     if (!db.warehouses.find({}, (err, docs) => docs.length)) {
