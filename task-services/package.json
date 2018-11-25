@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node worker.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "camunda-external-task-client-js": "^1.1.0-alpha1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "strong-soap": "^1.14.0"
   }
 }

@@ -7,3 +7,9 @@ services:
     build: ./api
     ports:
       - 3000:3000
+    networks:
+      - elogistik-net
+networks:
+    elogistik-net:
+        external:
+            name: elogistik-net

@@ -28,6 +28,10 @@ Send Request to `http://localhost:8080/engine-rest/message`
       "value" : "Rozi",
       "type": "String"
     },
+    "email" : {
+      "value" : "13515026@std.stei.itb.ac.id",
+      "type": "String"
+    },
     "type" : {
       "value" : "shipping",
       "type": "String"
@@ -68,6 +72,10 @@ Send Request to `http://localhost:8080/engine-rest/message`
     },
     "requester" : {
       "value" : "Rozi",
+      "type": "String"
+    },
+    "email" : {
+      "value" : "13515026@std.stei.itb.ac.id",
       "type": "String"
     },
     "type" : {
@@ -114,6 +122,10 @@ Send Request to `http://localhost:8080/engine-rest/message`
     },
     "requester" : {
       "value" : "Rozi",
+      "type": "String"
+    },
+    "email" : {
+      "value" : "13515026@std.stei.itb.ac.id",
       "type": "String"
     },
     "type" : {

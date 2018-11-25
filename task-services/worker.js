@@ -17,8 +17,10 @@ const {
       } = require('./supply-request');
 
 const { Client, logger } = require('camunda-external-task-client-js');
-const config = { baseUrl: 'http://localhost:8080/engine-rest'};
+//const config = { baseUrl: 'http://localhost:8080/engine-rest'};
+const config = { baseUrl: 'http://elogistik-task-svc:8080/engine-rest'};
 const client = new Client(config);
+//console.log(client);
 
 client.subscribe('dummy-payment', dummyPayment);
 client.subscribe('payment-failed', paymentFailed);
