@@ -87,7 +87,7 @@ async function createNewShipping({ task, taskService }) {
     });
 
     login.then(function(token) {
-        console.log('heee' + token);
+        processVariables.set("token", token);
         const template = {
             "template": {
                 "data": [
