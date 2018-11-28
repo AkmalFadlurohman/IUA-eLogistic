@@ -1,3 +1,7 @@
+while [ "$0" != "./elog.sh" ]; do
+    shift
+done
+
 if [ $# != 1 ]; then
     echo "Command: ./elog.sh [start|stop|upload-bpmn]"
 else
