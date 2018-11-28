@@ -15,6 +15,9 @@ services:
     build:
       context: ./
       dockerfile: worker.dockerfile
+      args:
+        - http_proxy
+        - https_proxy
     networks:
       - elogistik-net
 networks:

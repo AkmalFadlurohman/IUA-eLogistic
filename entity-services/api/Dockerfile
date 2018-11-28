@@ -7,10 +7,6 @@ COPY package*.json ./
 ARG http_proxy
 ARG https_proxy
 
-RUN echo ${http_proxy}
-RUN echo ${HTTP_PROXY}
-RUN echo ${https_proxy}
-RUN echo ${HTTPS_PROXY}
 RUN npm install
 
 COPY . .

@@ -4,6 +4,9 @@ WORKDIR usr/src/worker
 
 COPY package*.json ./
 
+ARG http_proxy
+ARG https_proxy
+
 RUN npm install
 
 COPY . .
