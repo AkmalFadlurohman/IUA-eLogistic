@@ -47,93 +47,138 @@ async function createNewSupply({ task, taskService }) {
     let parsedItem = parseItem(items);
     let processVariables = new Variables();
 
-    // const token = login();
-    // console.log(token);
+    let login = new Promise(function(resolve, reject) {
+        const template = {
+            "template": {
+                "data": [
+                    {
+                        "name": "name",
+                        "value": "um",
+                        "prompt": "Registered partner company name"
+                    },
+                    {
+                        "name": "password",
+                        "value": "um",
+                        "prompt": "Password of the account"
+                    }
+                ]
+            }
+        };
 
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidW0iLCJpYXQiOjE1NDI1NDQxMzl9.slyHpyMoYlhzInkhVEhrtGC1uT6r1N1oOipyI5lhvkw`
-    };
+        const headers = {
+            'Content-Type': 'application/json'
+        };
 
-    const template = {
-        "template": {
-            "data": [
-                {
-                    "name": "status",
-                    "value": status,
-                    "prompt": "Status of the request, used for tracking"
-                },
-                {
-                    "name": "price",
-                    "value": price,
-                    "prompt": "Price that should be paid by the requester"
-                },
-                {
-                    "name": "date",
-                    "value": date,
-                    "prompt": "Date the request was made"
-                },
-                {
-                    "name": "items",
-                    "value": parsedItem,
-                    "prompt": "List of items relating to the request"
-                },
-                {
-                    "name": "requester",
-                    "value": requester,
-                    "prompt": "Who made the request"
-                },
-                {
-                    "name": "type",
-                    "value": type,
-                    "prompt": "Type of the request [shipping|storage|supply]"
-                },
-                {
-                    "name": "source",
-                    "value": source,
-                    "prompt": "From where the shipment should be picked up"
-                },
-                {
-                    "name": "destination",
-                    "value": destination,
-                    "prompt": "To where the shipment should be delivered"
-                },
-                {
-                    "name": "frequency",
-                    "value": frequency,
-                    "prompt": "How frequent the goods should be supplied"
-                },
-                {
-                    "name": "sinceDate",
-                    "value": sinceDate,
-                    "prompt": "Since when the shipment is stored"
-                },
-                {
-                    "name": "untilDate",
-                    "value": untilDate,
-                    "prompt": "Until when the shipment is stored"
-                }
-            ]
+        const options = {
+            //url: 'http://127.0.0.1:3000/login',
+            url: 'http://elogistik-entity-svc:3000/login',
+            method: 'POST',
+            headers: headers,
+            json: template
         }
-    }
-    
-    const options = {
-        //url: 'http://localhost:3000/api/requests',
-        url: 'http://elogistik-entity-svc:3000/api/requests',
-        method: 'POST',
-        headers: headers,
-        json: template
-    }
 
-    request(options, function(error, response, body) {
-        if (response.statusCode == 201) {
-            console.log('Supply request created');
-            processVariables.set('supplyCreated', true);
-        } else {
-            console.log('Supply request didnt created');
-            processVariables.set('supplyCreated', false);
+        request(options, function(error, response, body) {
+            if (response.statusCode == 200) {
+                console.log('Login Success with user: um');
+            } else {
+                console.log('Login failed!');
+                reject("error");
+            }
+            resolve(response.body.token);
+        });
+    });
+
+    login.then(function(token) {
+        processVariables.set("token", token);
+
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        };
+
+        const template = {
+            "template": {
+                "data": [
+                    {
+                        "name": "status",
+                        "value": status,
+                        "prompt": "Status of the request, used for tracking"
+                    },
+                    {
+                        "name": "price",
+                        "value": price,
+                        "prompt": "Price that should be paid by the requester"
+                    },
+                    {
+                        "name": "date",
+                        "value": date,
+                        "prompt": "Date the request was made"
+                    },
+                    {
+                        "name": "items",
+                        "value": parsedItem,
+                        "prompt": "List of items relating to the request"
+                    },
+                    {
+                        "name": "requester",
+                        "value": requester,
+                        "prompt": "Who made the request"
+                    },
+                    {
+                        "name": "type",
+                        "value": type,
+                        "prompt": "Type of the request [shipping|storage|supply]"
+                    },
+                    {
+                        "name": "source",
+                        "value": source,
+                        "prompt": "From where the shipment should be picked up"
+                    },
+                    {
+                        "name": "destination",
+                        "value": destination,
+                        "prompt": "To where the shipment should be delivered"
+                    },
+                    {
+                        "name": "frequency",
+                        "value": frequency,
+                        "prompt": "How frequent the goods should be supplied"
+                    },
+                    {
+                        "name": "sinceDate",
+                        "value": sinceDate,
+                        "prompt": "Since when the shipment is stored"
+                    },
+                    {
+                        "name": "untilDate",
+                        "value": untilDate,
+                        "prompt": "Until when the shipment is stored"
+                    }
+                ]
+            }
         }
-        taskService.complete(task, processVariables, null);
+        
+        const options = {
+            //url: 'http://localhost:3000/api/requests',
+            url: 'http://elogistik-entity-svc:3000/api/requests',
+            method: 'POST',
+            headers: headers,
+            json: template
+        }
+
+        request(options, function(error, response, body) {
+            if (response.statusCode == 201) {
+                console.log('Supply request created');
+                processVariables.set('supplyCreated', true);
+            } else {
+                console.log('Supply request didnt created');
+                processVariables.set('supplyCreated', false);
+            }
+            taskService.complete(task, processVariables, null);
+        });
+    }).catch(function(error) {
+        console.log('Error gan: ' + error);
     });
 }
 

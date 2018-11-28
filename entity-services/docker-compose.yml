@@ -7,9 +7,8 @@ services:
     build: 
       context: ./api
       args:
-        - http_proxy="http://iqbalkhowarizmi:20365745@cache.itb.ac.id:8080/"
-        - https_proxy="http://iqbalkhowarizmi:20365745@cache.itb.ac.id:8080/"
-        - no_proxy
+        - http_proxy
+        - https_proxy
     ports:
       - 3000:3000
     networks:

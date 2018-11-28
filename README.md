@@ -1,5 +1,10 @@
 # IUA-eLogistic
-IUA SoA eLogistik Service 
+IUA SoA eLogistik Service
+
+## Quick Start
+```$./elog start```
+```$./elog upload-bpmn```
+```$./elog stop```
 
 ## Guide
 
@@ -8,7 +13,7 @@ IUA SoA eLogistik Service
 - Run the entity service using the provided docker compose file in entity-services directory
 - Run the in-house web service using the provided docker compose file in web-services directory
 - Deploy the bpmn models from local Camunda BPMN modeler to http://localhost:9001/engine-rest/deployment/create
-- Run the task service using the provided docker compose file
+- Run the task service using the provided docker compose file in task-services directory
 
 ## Collaborators
 
