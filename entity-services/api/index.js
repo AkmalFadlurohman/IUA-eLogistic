@@ -6,7 +6,8 @@ const warehouses = require('./routes/warehouses');
 const partners = require('./routes/partners');
 const requests = require('./routes/requests');
 const login = require('./routes/login');
-const auth = require('./auth/authentication')
+const authentication = require('./auth/authentication');
+const authorization = require('./auth/authorization');
 
 const DBG = require('debug');
 const debug = DBG('api:debug');
@@ -21,7 +22,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(logger('dev'));
 
-app.all('/api/*', auth);
+app.all('/api/*', authentication);
+app.all('/api/*', authorization);
 app.use('/api/items', items);
 app.use('/api/warehouses', warehouses);
 app.use('/api/partners', partners);

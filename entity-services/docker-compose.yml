@@ -4,7 +4,11 @@ services:
   entity-service:
     image: elogistik-entity-img
     container_name: elogistik-entity-svc
-    build: ./api
+    build: 
+      context: ./api
+      args:
+        - http_proxy
+        - https_proxy
     ports:
       - 3000:3000
     networks:

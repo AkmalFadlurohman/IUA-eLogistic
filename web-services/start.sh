@@ -1,0 +1,1 @@
+http_proxy=$http_proxy https_proxy=$https_proxy docker-compose up -d --build
