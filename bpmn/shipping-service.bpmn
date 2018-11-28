@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1bgc8j4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1bgc8j4" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.1">
   <bpmn:collaboration id="Collaboration_00y9fo1">
     <bpmn:participant id="shipping-service" name="ShippingService" processRef="shippingProcess" />
     <bpmn:participant id="Participant_0koloon" name="Customer" />
@@ -28,7 +28,7 @@
     <bpmn:userTask id="Task_12p72ge" name="Send to next region warehouse" camunda:assignee="demo">
       <bpmn:extensionElements>
         <camunda:formData>
-          <camunda:formField id="isDestination" label="Is destination?" type="boolean" />
+          <camunda:formField id="region" label="Region warehouse" type="string" />
         </camunda:formData>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1txgl2e</bpmn:incoming>
@@ -79,11 +79,11 @@
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0mm29p7" sourceRef="Task_0xowe26" targetRef="EndEvent_17ljjle" />
     <bpmn:sequenceFlow id="SequenceFlow_12i8wpi" name="yes" sourceRef="ExclusiveGateway_05ingzd" targetRef="Task_0xowe26">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isDestination}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${region == destination}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0jle8vh" sourceRef="Task_12p72ge" targetRef="ExclusiveGateway_05ingzd" />
     <bpmn:sequenceFlow id="SequenceFlow_1p86np9" name="no" sourceRef="ExclusiveGateway_05ingzd" targetRef="Task_12p72ge">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!isDestination}</bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${region != destination}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1txgl2e" sourceRef="Task_1wexqj5" targetRef="Task_12p72ge" />
     <bpmn:sequenceFlow id="SequenceFlow_0lkykev" sourceRef="Task_1bgqop0" targetRef="Task_1xrt52u" />
